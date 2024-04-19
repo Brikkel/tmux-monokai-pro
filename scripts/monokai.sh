@@ -28,14 +28,15 @@ main() {
 
   # Monokai Pro Color Pallette
   white='#fcfcfa'
-  black='#2d2a2e'
-  gray='#727072'
-  red='#ff6188'
+  black='#19181a'
+  background='#2d2a2e'
+  lightgray='#727072'
+  pink='#ff6188'
   green='#a9dc76'
   yellow='#ffd866'
   blue='#78dce8'
-  magenta='#fc9867'
-  cyan='#ab9df2'
+  orange='#fc9867'
+  purple='#ab9df2'
 
   # Handle left icon configuration
   case $show_left_icon in
@@ -87,8 +88,8 @@ main() {
     current_flags=""
     ;;
   true)
-    flags="#{?window_flags,#[fg=${cyan}]#{window_flags},}"
-    current_flags="#{?window_flags,#[fg=${cyan}]#{window_flags},}"
+    flags="#{?window_flags,#[fg=${purple}]#{window_flags},}"
+    current_flags="#{?window_flags,#[fg=${purple}]#{window_flags},}"
     ;;
   esac
 
@@ -112,20 +113,20 @@ main() {
   else
     tmux set-option -g pane-active-border-style "fg=${green}"
   fi
-  tmux set-option -g pane-border-style "fg=${gray}"
+  tmux set-option -g pane-border-style "fg=${lightgray}"
 
   # message styling
-  tmux set-option -g message-style "bg=${gray},fg=${white}"
+  tmux set-option -g message-style "bg=${lightgray},fg=${white}"
 
   # status bar
-  tmux set-option -g status-style "bg=${gray},fg=${white}"
+  tmux set-option -g status-style "bg=${black},fg=${white}"
 
   # Status left
   if $show_powerline; then
-    tmux set-option -g status-left "#[fg=${green},bg=${black}]#{?client_prefix,#[fg=${yellow}],}#[bg=${green},fg=${black},bold]#{?client_prefix,#[bg=${yellow}],} ${left_icon} #[fg=${green},bg=${gray}]#{?client_prefix,#[fg=${yellow}],}${left_sep}"
-    powerbg=${gray}
+    tmux set-option -g status-left "#[fg=${green},bg=${background}]#{?client_prefix,#[fg=${yellow}],}#[bg=${green},fg=${background},bold]#{?client_prefix,#[bg=${yellow}],} ${left_icon} #[fg=${green},bg=${lightgray}]#{?client_prefix,#[fg=${yellow}],}${left_sep}"
+    powerbg=${lightgray}
   else
-    tmux set-option -g status-left "#[bg=${green},fg=${black},bold]#{?client_prefix,#[bg=${yellow}],} ${left_icon} "
+    tmux set-option -g status-left "#[bg=${green},fg=${background},bold]#{?client_prefix,#[bg=${yellow}],} ${left_icon} "
   fi
 
   # Status right
@@ -134,53 +135,53 @@ main() {
   for plugin in "${plugins[@]}"; do
 
     if [ $plugin = "git" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-git-colors" "green black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-git-colors" "green background")
       script="#($current_dir/git.sh)"
     fi
 
     if [ $plugin = "battery" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-battery-colors" "red black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-battery-colors" "pink background")
       script="#($current_dir/battery.sh)"
     fi
 
     if [ $plugin = "gpu-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-gpu-usage-colors" "red black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-gpu-usage-colors" "pink background")
       script="#($current_dir/gpu_usage.sh)"
     fi
 
     if [ $plugin = "cpu-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "magenta black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "orange background")
       script="#($current_dir/cpu_info.sh)"
     fi
 
     if [ $plugin = "ram-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "yellow black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "yellow background")
       script="#($current_dir/ram_info.sh)"
     fi
 
     if [ $plugin = "network" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-colors" "blue black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-colors" "blue background")
       script="#($current_dir/network.sh)"
     fi
 
     if [ $plugin = "network-bandwidth" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-bandwidth-colors" "blue black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-bandwidth-colors" "blue background")
       tmux set-option -g status-right-length 250
       script="#($current_dir/network_bandwidth.sh)"
     fi
 
     if [ $plugin = "network-ping" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-ping-colors" "gray white")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-ping-colors" "lightgray white")
       script="#($current_dir/network_ping.sh)"
     fi
 
     if [ $plugin = "spotify-tui" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-spotify-tui-colors" "green black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-spotify-tui-colors" "green background")
       script="#($current_dir/spotify-tui.sh)"
     fi
 
     if [ $plugin = "kubernetes-context" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-kubernetes-context-colors" "blue black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-kubernetes-context-colors" "blue background")
       script="#($current_dir/kubernetes_context.sh $show_kubernetes_context_label)"
     fi
 
@@ -191,7 +192,7 @@ main() {
         sleep 0.01
       done
 
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-weather-colors" "magenta black")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-weather-colors" "orange background")
       script="#(cat $datafile)"
     fi
 
@@ -217,19 +218,19 @@ main() {
   done
 
   if $show_powerline; then
-    tmux set-option -ga status-right "#[fg=${green},bg=${yellow}]${right_sep}#[bg=${green},fg=${black},bold] #h #[bg=${black},fg=${green}]"
+    tmux set-option -ga status-right "#[fg=${green},bg=${yellow}]${right_sep}#[bg=${green},fg=${background},bold] #h #[bg=${background},fg=${green}]"
   else
-    tmux set-option -ga status-right "#[fg=${green},bg=${blue}]${right_sep}#[bg=${green},fg=${black},bold] #h "
+    tmux set-option -ga status-right "#[fg=${green},bg=${blue}]${right_sep}#[bg=${green},fg=${background},bold] #h "
   fi
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[bg=${white},fg=${gray}]${left_sep} #[fg=${black},bg=${white}]#I #W${current_flags} #[bg=${gray},fg=${white}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[bg=${white},fg=${lightgray}]${left_sep} #[fg=${background},bg=${white}]#I #W${current_flags} #[bg=${lightgray},fg=${white}]${left_sep}"
   else
-    tmux set-window-option -g window-status-current-format "#[fg=${gray},bg=${white}] #I #W${current_flags} "
+    tmux set-window-option -g window-status-current-format "#[fg=${lightgray},bg=${white}] #I #W${current_flags} "
   fi
 
-  tmux set-window-option -g window-status-format "#[bg=${gray},fg=${gray}]${left_sep} #[fg=${white},bg=${gray}]#I #W${flags} #[bg=${gray},fg=${gray}]${left_sep}"
+  tmux set-window-option -g window-status-format "#[bg=${lightgray},fg=${lightgray}]${left_sep} #[fg=${white},bg=${lightgray}]#I #W${flags} #[bg=${lightgray},fg=${lightgray}]${left_sep}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
   tmux set-window-option -g window-status-separator ""
