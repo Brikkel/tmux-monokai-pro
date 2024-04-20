@@ -37,6 +37,7 @@ main() {
   blue='#78dce8'
   orange='#fc9867'
   purple='#ab9df2'
+  red='ff5c57'
 
   # Handle left icon configuration
   case $show_left_icon in
@@ -150,12 +151,12 @@ main() {
     fi
 
     if [ $plugin = "cpu-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "orange background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "red background")
       script="#($current_dir/cpu_info.sh)"
     fi
 
     if [ $plugin = "ram-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "yellow background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "orange background")
       script="#($current_dir/ram_info.sh)"
     fi
 
@@ -218,7 +219,7 @@ main() {
   done
 
   if $show_powerline; then
-    tmux set-option -ga status-right "#[fg=${purple},bg=${green}]${right_sep}#[bg=${yellow},fg=${background},bold] #h #[bg=${background},fg=${yellow}]"
+    tmux set-option -ga status-right "#[fg=${yellow},bg=${orange}]${right_sep}#[bg=${yellow},fg=${background},bold] #h #[bg=${background},fg=${yellow}]"
   else
     tmux set-option -ga status-right "#[fg=${yellow},bg=${blue}]${right_sep}#[bg=${yellow},fg=${background},bold] #h "
   fi
