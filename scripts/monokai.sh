@@ -123,8 +123,8 @@ main() {
 
   # Status left
   if $show_powerline; then
-    tmux set-option -g status-left "#[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${green}],}#[bg=${yellow},fg=${background},bold]#{?client_prefix,#[bg=${green}],} ${left_icon} #[fg=${yellow},bg=${black}]#{?client_prefix,#[fg=${green}],}${left_sep}"
-    powerbg=${lightgray}
+    tmux set-option -g status-left "#[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${green}],}#[bg=${yellow},fg=${background},bold]#{?client_prefix,#[bg=${yellow}],} ${left_icon} #[fg=${green},bg=${black}]#{?client_prefix,#[fg=${yellow}],}${left_sep}"
+    powerbg=${black}
   else
     tmux set-option -g status-left "#[bg=${yellow},fg=${background},bold]#{?client_prefix,#[bg=${yellow}],} ${left_icon} "
   fi
@@ -135,7 +135,7 @@ main() {
   for plugin in "${plugins[@]}"; do
 
     if [ $plugin = "git" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-git-colors" "green background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-git-colors" "yellow background")
       script="#($current_dir/git.sh)"
     fi
 
@@ -171,7 +171,7 @@ main() {
     fi
 
     if [ $plugin = "network-ping" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-ping-colors" "lightgray white")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-ping-colors" "black white")
       script="#($current_dir/network_ping.sh)"
     fi
 
@@ -225,12 +225,12 @@ main() {
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[bg=${white},fg=${lightgray}]${left_sep} #[fg=${background},bg=${white}]#I #W${current_flags} #[bg=${lightgray},fg=${white}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[bg=${white},fg=${black}]${left_sep} #[fg=${background},bg=${white}]#I #W${current_flags} #[bg=${black},fg=${white}]${left_sep}"
   else
-    tmux set-window-option -g window-status-current-format "#[fg=${lightgray},bg=${white}] #I #W${current_flags} "
+    tmux set-window-option -g window-status-current-format "#[fg=${black},bg=${white}] #I #W${current_flags} "
   fi
 
-  tmux set-window-option -g window-status-format "#[bg=${lightgray},fg=${lightgray}]${left_sep} #[fg=${white},bg=${lightgray}]#I #W${flags} #[bg=${lightgray},fg=${lightgray}]${left_sep}"
+  tmux set-window-option -g window-status-format "#[bg=${black},fg=${black}]${left_sep} #[fg=${white},bg=${black}]#I #W${flags} #[bg=${black},fg=${black}]${left_sep}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
   tmux set-window-option -g window-status-separator ""
