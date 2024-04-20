@@ -218,9 +218,9 @@ main() {
   done
 
   if $show_powerline; then
-    tmux set-option -ga status-right "#[fg=${green},bg=${yellow}]${right_sep}#[bg=${green},fg=${background},bold] #h #[bg=${background},fg=${green}]"
+    tmux set-option -ga status-right "#[fg=${yellow},bg=${green}]${right_sep}#[bg=${yellow},fg=${background},bold] #h #[bg=${background},fg=${yellow}]"
   else
-    tmux set-option -ga status-right "#[fg=${green},bg=${blue}]${right_sep}#[bg=${green},fg=${background},bold] #h "
+    tmux set-option -ga status-right "#[fg=${yellow},bg=${blue}]${right_sep}#[bg=${yellow},fg=${background},bold] #h "
   fi
 
   # Window option
