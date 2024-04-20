@@ -37,7 +37,7 @@ main() {
   blue='#78dce8'
   orange='#fc9867'
   purple='#ab9df2'
-  red='ff5c57'
+  red='#ff5c57'
 
   # Handle left icon configuration
   case $show_left_icon in
