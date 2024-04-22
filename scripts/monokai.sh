@@ -116,11 +116,11 @@ main() {
 
   # pane border styling
   if $show_border_contrast; then
-    tmux set-option -g pane-active-border-style "fg=${green}"
+    tmux set-option -g pane-active-border-style "fg=${yellow}"
   else
-    tmux set-option -g pane-active-border-style "fg=${green}"
+    tmux set-option -g pane-active-border-style "fg=${yellow}"
   fi
-  tmux set-option -g pane-border-style "fg=${lightgray}"
+  tmux set-option -g pane-border-style "fg=${dimmed5}"
 
   # message styling
   tmux set-option -g message-style "bg=${lightgray},fg=${dimmed1}"
@@ -130,10 +130,10 @@ main() {
 
   # Status left
   if $show_powerline; then
-    tmux set-option -g status-left "#[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${green}],}#[bg=${yellow},fg=${background},bold]#{?client_prefix,#[bg=${green}],} ${left_icon} #[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${green}],}${left_sep}"
+    tmux set-option -g status-left "#[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${orange}],}#[bg=${yellow},fg=${background},bold]#{?client_prefix,#[bg=${orange}],} ${left_icon} #[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${orange}],}${left_sep}"
     powerbg=${background}
   else
-    tmux set-option -g status-left "#[bg=${green},fg=${background},bold]#{?client_prefix,#[bg=${green}],} ${left_icon} "
+    tmux set-option -g status-left "#[bg=${orange},fg=${background},bold]#{?client_prefix,#[bg=${orange}],} ${left_icon} "
   fi
 
   # Status right
