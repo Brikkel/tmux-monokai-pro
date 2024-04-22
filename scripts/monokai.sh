@@ -123,10 +123,10 @@ main() {
   tmux set-option -g pane-border-style "fg=${lightgray}"
 
   # message styling
-  tmux set-option -g message-style "bg=${lightgray},fg=${white}"
+  tmux set-option -g message-style "bg=${lightgray},fg=${dimmed1}"
 
   # status bar
-  tmux set-option -g status-style "bg=${background},fg=${white}"
+  tmux set-option -g status-style "bg=${background},fg=${dimmed1}"
 
   # Status left
   if $show_powerline; then
@@ -178,7 +178,7 @@ main() {
     fi
 
     if [ $plugin = "network-ping" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-ping-colors" "background white")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-network-ping-colors" "background dimmed1")
       script="#($current_dir/network_ping.sh)"
     fi
 
@@ -204,7 +204,7 @@ main() {
     fi
 
     if [ $plugin = "time" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-time-colors" "green white")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-time-colors" "green dimmed1")
       if $show_day_month && $show_military; then # military time and dd/mm
         script="%a %d/%m %R ${timezone} "
       elif $show_military; then # only military time
@@ -232,12 +232,12 @@ main() {
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[bg=${orange},fg=${background}]${left_sep} #[fg=${background},bg=${orange}]#I #W${current_flags} #[bg=${background},fg=${orange}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[bg=${yellow},fg=${background}]${left_sep} #[fg=${background},bg=${yellow}]#I #W${current_flags} #[bg=${background},fg=${yellow}]${left_sep}"
   else
-    tmux set-window-option -g window-status-current-format "#[fg=${background},bg=${white}] #I #W${current_flags}"
+    tmux set-window-option -g window-status-current-format "#[fg=${dimmed5},bg=${dimmed1}] #I #W${current_flags}"
   fi
 
-  tmux set-window-option -g window-status-format "#[bg=${background},fg=${background}]${left_sep} #[fg=${white},bg=${background}]#I #W${flags} #[bg=${background},fg=${background}]${left_sep}"
+  tmux set-window-option -g window-status-format "#[bg=${background},fg=${background}]${left_sep} #[fg=${dimmed1},bg=${background}]#I #W${flags} #[bg=${background},fg=${background}]${left_sep}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
   tmux set-window-option -g window-status-separator ""
