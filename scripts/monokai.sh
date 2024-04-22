@@ -120,7 +120,7 @@ main() {
   tmux set-option -g message-style "bg=${lightgray},fg=${white}"
 
   # status bar
-  tmux set-option -g status-style "bg=${black},fg=${white}"
+  tmux set-option -g status-style "bg=${background},fg=${white}"
 
   # Status left
   if $show_powerline; then
