@@ -24,7 +24,7 @@ main() {
   show_day_month=$(get_tmux_option "@monokai-day-month" false)
   show_refresh=$(get_tmux_option "@monokai-refresh-rate" 5)
   show_kubernetes_context_label=$(get_tmux_option "@monokai-kubernetes-context-label" "")
-  IFS=' ' read -r -a plugins <<<$(get_tmux_option "@monokai-plugins" "network-ping cpu-usage ram-usage")
+  IFS=' ' read -r -a plugins <<<$(get_tmux_option "@monokai-plugins" "cpu-usage ram-usage")
 
   # Monokai Pro Color Pallette
   white='#fcfcfa'
@@ -157,12 +157,12 @@ main() {
     fi
 
     if [ $plugin = "cpu-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "pink background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "background dimmed1")
       script="#($current_dir/cpu_info.sh)"
     fi
 
     if [ $plugin = "ram-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "orange background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "dimmed5 yellow")
       script="#($current_dir/ram_info.sh)"
     fi
 
