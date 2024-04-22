@@ -151,7 +151,7 @@ main() {
     fi
 
     if [ $plugin = "cpu-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "red background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "pink background")
       script="#($current_dir/cpu_info.sh)"
     fi
 
@@ -228,7 +228,7 @@ main() {
   if $show_powerline; then
     tmux set-window-option -g window-status-current-format "#[bg=${background},fg=${black}]${left_sep} #[fg=${white},bg=${background}]#I #W${current_flags} #[bg=${black},fg=${background}]${left_sep}"
   else
-    tmux set-window-option -g window-status-current-format "#[fg=${black},bg=${white}] #I #W${current_flags} "
+    tmux set-window-option -g window-status-current-format "#[fg=${black},bg=${white}] #I #W${current_flags}"
   fi
 
   tmux set-window-option -g window-status-format "#[bg=${black},fg=${black}]${left_sep} #[fg=${white},bg=${black}]#I #W${flags} #[bg=${black},fg=${black}]${left_sep}"
