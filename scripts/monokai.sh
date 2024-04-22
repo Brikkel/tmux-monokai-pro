@@ -234,10 +234,10 @@ main() {
   if $show_powerline; then
     tmux set-window-option -g window-status-current-format "#[bg=${yellow},fg=${background}]${left_sep} #[fg=${background},bg=${yellow}]#I #W${current_flags} #[bg=${background},fg=${yellow}]${left_sep}"
   else
-    tmux set-window-option -g window-status-current-format "#[fg=${dimmed5},bg=${dimmed1}] #I #W${current_flags}"
+    tmux set-window-option -g window-status-current-format "#[fg=${background},bg=${dimmed1}] #I #W${current_flags}"
   fi
 
-  tmux set-window-option -g window-status-format "#[bg=${background},fg=${background}]${left_sep} #[fg=${dimmed1},bg=${background}]#I #W${flags} #[bg=${background},fg=${background}]${left_sep}"
+  tmux set-window-option -g window-status-format "#[bg=${background},fg=${dimmed5}]${left_sep} #[fg=${yellow},bg=${dimmed5}]#I #W${flags} #[bg=${dimmed5},fg=${background}]${left_sep}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
   tmux set-window-option -g window-status-separator ""
