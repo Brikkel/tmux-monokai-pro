@@ -39,7 +39,7 @@ main() {
   purple='#ab9df2'
   red='#ff5c57'
 
-  accent=${blue}
+  accent=${purple}
   accent2=${orange}
 
   dimmed1='#C1C0C0'
