@@ -39,6 +39,9 @@ main() {
   purple='#ab9df2'
   red='#ff5c57'
 
+  accent=${yellow}
+  accent2=${orange}
+
   dimmed1='#C1C0C0'
   dimmed2='#939293'
   dimmed3='#727072'
@@ -116,9 +119,9 @@ main() {
 
   # pane border styling
   if $show_border_contrast; then
-    tmux set-option -g pane-active-border-style "fg=${yellow}"
+    tmux set-option -g pane-active-border-style "fg=${accent}"
   else
-    tmux set-option -g pane-active-border-style "fg=${yellow}"
+    tmux set-option -g pane-active-border-style "fg=${accent}"
   fi
   tmux set-option -g pane-border-style "fg=${dimmed5}"
 
@@ -130,10 +133,10 @@ main() {
 
   # Status left
   if $show_powerline; then
-    tmux set-option -g status-left "#[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${orange}],}#[bg=${yellow},fg=${background},bold]#{?client_prefix,#[bg=${orange}],} ${left_icon} #[fg=${yellow},bg=${background}]#{?client_prefix,#[fg=${orange}],}${left_sep}"
+    tmux set-option -g status-left "#[fg=${accent},bg=${background}]#{?client_prefix,#[fg=${accent2}],}#[bg=${accent},fg=${background},bold]#{?client_prefix,#[bg=${accent2}],} ${left_icon} #[fg=${accent},bg=${background}]#{?client_prefix,#[fg=${accent2}],}${left_sep}"
     powerbg=${background}
   else
-    tmux set-option -g status-left "#[bg=${orange},fg=${background},bold]#{?client_prefix,#[bg=${orange}],} ${left_icon} "
+    tmux set-option -g status-left "#[bg=${accent2},fg=${background},bold]#{?client_prefix,#[bg=${accent2}],} ${left_icon} "
   fi
 
   # Status right
@@ -142,7 +145,7 @@ main() {
   for plugin in "${plugins[@]}"; do
 
     if [ $plugin = "git" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-git-colors" "yellow background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-git-colors" "accent background")
       script="#($current_dir/git.sh)"
     fi
 
@@ -162,7 +165,7 @@ main() {
     fi
 
     if [ $plugin = "ram-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "dimmed5 yellow")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "dimmed5 accent")
       script="#($current_dir/ram_info.sh)"
     fi
 
@@ -199,7 +202,7 @@ main() {
         sleep 0.01
       done
 
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-weather-colors" "orange background")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-weather-colors" "accent2 background")
       script="#(cat $datafile)"
     fi
 
@@ -225,19 +228,19 @@ main() {
   done
 
   if $show_powerline; then
-    tmux set-option -ga status-right "#[fg=${yellow},bg=${dimmed5}]${right_sep}#[bg=${yellow},fg=${background},bold]  #h #[bg=${background},fg=${yellow}]"
+    tmux set-option -ga status-right "#[fg=${accent},bg=${dimmed5}]${right_sep}#[bg=${accent},fg=${background},bold]  #h #[bg=${background},fg=${accent}]"
   else
-    tmux set-option -ga status-right "#[fg=${yellow},bg=${blue}]${right_sep}#[bg=${yellow},fg=${background},bold] #h "
+    tmux set-option -ga status-right "#[fg=${accent},bg=${blue}]${right_sep}#[bg=${accent},fg=${background},bold] #h "
   fi
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[bg=${yellow},fg=${background}]${left_sep} #[fg=${background},bg=${yellow}]#I #W${current_flags} #[bg=${background},fg=${yellow}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[bg=${accent},fg=${background}]${left_sep} #[fg=${background},bg=${accent}]#I #W${current_flags} #[bg=${background},fg=${accent}]${left_sep}"
   else
     tmux set-window-option -g window-status-current-format "#[fg=${background},bg=${dimmed1}] #I #W${current_flags}"
   fi
 
-  tmux set-window-option -g window-status-format "#[bg=${dimmed5},fg=${background}]${left_sep} #[fg=${yellow},bg=${dimmed5}]#I #W${flags} #[bg=${background},fg=${dimmed5}]${left_sep}"
+  tmux set-window-option -g window-status-format "#[bg=${dimmed5},fg=${background}]${left_sep} #[fg=${accent},bg=${dimmed5}]#I #W${flags} #[bg=${background},fg=${dimmed5}]${left_sep}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
   tmux set-window-option -g window-status-separator ""
