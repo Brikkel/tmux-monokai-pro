@@ -27,25 +27,25 @@ main() {
   IFS=' ' read -r -a plugins <<<$(get_tmux_option "@monokai-plugins" "cpu-usage ram-usage")
 
   # Monokai Pro Color Pallette
-  white='#fcfcfa'
-  black='#19181a'
+  # white='#fcfcfa'
+  # black='#19181a'
   background='#2d2a2e'
   lightgray='#727072'
-  pink='#ff6188'
-  green='#a9dc76'
-  yellow='#ffd866'
+  # pink='#ff6188'
+  # green='#a9dc76'
+  # yellow='#ffd866'
   blue='#78dce8'
   orange='#fc9867'
   purple='#ab9df2'
-  red='#ff5c57'
+  # red='#ff5c57'
 
   accent=${purple}
   accent2=${orange}
 
   dimmed1='#C1C0C0'
-  dimmed2='#939293'
-  dimmed3='#727072'
-  dimmed4='#5B595C'
+  # dimmed2='#939293'
+  # dimmed3='#727072'
+  # dimmed4='#5B595C'
   dimmed5='#403E41'
 
   # Handle left icon configuration
@@ -160,12 +160,12 @@ main() {
     fi
 
     if [ $plugin = "cpu-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "background dimmed1")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-cpu-usage-colors" "background dimmed1 dimmed5")
       script="#($current_dir/cpu_info.sh)"
     fi
 
     if [ $plugin = "ram-usage" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "dimmed5 accent")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@monokai-ram-usage-colors" "dimmed5 accent accent")
       script="#($current_dir/ram_info.sh)"
     fi
 
@@ -220,7 +220,9 @@ main() {
     fi
 
     if $show_powerline; then
-      tmux set-option -ga status-right "#[fg=${!colors[0]},bg=${powerbg},nobold,nounderscore,noitalics]${right_sep}#[fg=${!colors[1]},bg=${!colors[0]}] $script "
+    #   tmux set-option -ga status-right "#[fg=${!colors[0]},bg=${powerbg},nobold,nounderscore,noitalics]${right_sep}#[fg=${!colors[1]},bg=${!colors[0]}] $script "
+      tmux set-option -ga status-right "#[fg=${!colors[0]},bg=${powerbg},nobold,nounderscore,noitalics]#[fg=${!colors[1]},bg=${!colors[0]}] $script #[fg=${!colors[2]},bg=${!colors[0]},nobold,nounderscore,noitalics]${right_sep}"
+
       powerbg=${!colors[0]}
     else
       tmux set-option -ga status-right "#[fg=${!colors[1]},bg=${!colors[0]}] $script "
@@ -228,7 +230,7 @@ main() {
   done
 
   if $show_powerline; then
-    tmux set-option -ga status-right "#[fg=${accent},bg=${dimmed5}]${right_sep}#[bg=${accent},fg=${background},bold]  #h #[bg=${background},fg=${accent}]"
+    tmux set-option -ga status-right "#[bg=${accent},fg=${background},bold] #h #[bg=${background},fg=${accent}]"
   else
     tmux set-option -ga status-right "#[fg=${accent},bg=${blue}]${right_sep}#[bg=${accent},fg=${background},bold] #h "
   fi
